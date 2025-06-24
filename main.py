@@ -10,10 +10,29 @@ from PIL import Image, ImageTk
 genai.configure(api_key="AIzaSyCJM-AzGpg_ey8mE8V7sOJTvUCh12Ygq-0")
 vertexai.init(project="text-to-image-463914", location="us-central1")
 image_model = ImageGenerationModel.from_pretrained("imagen-3.0-generate-002")
+gen_model = genai.GenerativeModel('gemini-2.0-flash-lite')
+
+
+gemini_instruction = (
+  "Your mission for the project is being a Prompt analyzer"
+  "Analyze the first prompt and if you think it is not detailed ,"
+  "You should make the prompts richer and detailed so that it can be used in image generation  "
+  "If it is complicated as it is just add details in it (trying not to change the topic of it )"
+  "Keep it under 100 words so that Project can run faster"
+)
 
 
 def image_generation():
     prompt = entry.get()
+
+    genprompt = f"Create a detailed and organized prompt using: {prompt}"
+    response = gen_model.generate_content(
+            f"{gemini_instruction}\n\nUser's original prompt: '{prompt}'\n\nEnhanced prompt:")
+
+    enhanced_prompt = response.text.strip()
+    print(f"Original Prompt: '{prompt}'")
+    print(f"\nEnhanced Prompt from Gemini:\n'{enhanced_prompt}'")
+
 
     if select_box.get() == "Vertex AI":
         try:
