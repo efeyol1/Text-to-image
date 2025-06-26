@@ -1,11 +1,11 @@
 import google.generativeai as genai
 import vertexai
-from OpenSSL.crypto import TYPE_RSA
 from vertexai.preview.vision_models import ImageGenerationModel
 from PIL import Image
 from diffusers import StableDiffusionPipeline
 import torch
 import speech_recognition as sr
+
 
 # Google AI Settings
 genai.configure(api_key="AIzaSyCJM-AzGpg_ey8mE8V7sOJTvUCh12Ygq-0")
@@ -24,10 +24,11 @@ gemini_instruction = (
 def image_generation(model,typeofinput):
 
 
-    if typeofinput is str :
+    if typeofinput == "text" :
         prompt = input("Enter your prompt: ")
-    else:
-        r = sr.Recognizer()  # Initialize the recognizer
+
+    elif typeofinput == "voice":
+        r = sr.Recognizer()
 
         with sr.Microphone() as source:
             print("Say something!")
@@ -35,27 +36,25 @@ def image_generation(model,typeofinput):
             r.adjust_for_ambient_noise(source, duration=1)
 
 
-            audio = r.listen(source, timeout=5)  # Listen for up to 5 seconds of speech
+            audio = r.listen(source, timeout=5)
             print("Processing your speech...")
 
             # --- Using Google Web Speech API (Online) ---
             # This is free for basic use, but requires internet.
-            text = r.recognize_google(audio)
-            prompt = text
-            print(f"Google Web Speech API thinks you said: \"{text}\"")
 
-
-
-
-
-
-
-
-
-
-
-
-
+            try:
+                text = r.recognize_google(audio)
+                prompt = text
+                print(f"Google Web Speech API thinks you said: \"{text}\"")
+            except sr.UnknownValueError:
+                print("Google Web Speech API could not understand the audio")
+                return
+            except sr.RequestError as e:
+                print(f"Could not request results from Google Web Speech API; {e}")
+                return
+            except audio is None:
+                print("No audio input detected.")
+                return
 
 
     genprompt = f"Create a detailed and organized prompt using: {prompt}"
@@ -66,22 +65,43 @@ def image_generation(model,typeofinput):
     print(f"Original Prompt: '{prompt}'")
     print(f"\nEnhanced Prompt from Gemini:\n'{enhanced_prompt}'")
 
-    try:
-        images = image_model.generate_images(
-            prompt=enhanced_prompt,
-            number_of_images=1,
-        )
+    if model == "Vertex AI":
+        try:
+            images = image_model.generate_images(
+                prompt=enhanced_prompt,
+                number_of_images=1,
+            )
 
-        images[0].save("generated_image.jpg")
+            images[0].save("generated_image.jpg")
 
-        img = Image.open("generated_image.jpg")
-        img.show()
-    except Exception as e:
-        print(f"Image could not be generated: {str(e)}")
+            img = Image.open("generated_image.jpg")
+            img.show()
+        except Exception as e:
+            print(f"Image could not be generated: {str(e)}")
 
-image_generation()
+    elif model == "Hugging Face":
+        model_id = "runwayml/stable-diffusion-v1-5"
+
+        pipe = StableDiffusionPipeline.from_pretrained(model_id)
+
+        if torch.cuda.is_available():
+            pipe = pipe.to("cuda")
+        else:
+            print("CUDA not available, running on CPU. This will be very slow.")
+            pipe = pipe.to("cpu")
+
+        print(f"Generating image for prompt: '{enhanced_prompt}'...")
+
+        try:
+            image = pipe(prompt=enhanced_prompt).images[0]
+            image.save("generated_image.jpg")
+            image.show()
+        except Exception as e:
+            print(f"Image generation failed: {e}")
+
+
 
 if __name__ == '__main__':
     model = input("select a model (Vertex AI or Hugging Face): ")
-    typeofinput= input("select a input type (text or voice): ")
+    typeofinput = input("select a input type (text or voice): ")
     image_generation(model,typeofinput)

@@ -1,0 +1,11 @@
+Original Prompt:
+powerlifting
+
+Enhanced Prompt (Gemini):
+A highly detailed image of a powerlifter mid-lift, showcasing extreme muscular definition and strain. The setting is a brightly lit gym with weight plates and equipment visible. Capture the intensity and focus on the athlete's face as they strain to complete the lift. Consider dynamic lighting and a high-angle shot for dramatic effect.
+
+Model Used:
+Hugging Face
+
+Generated Image Path:
+images/generated_image_5.jpg

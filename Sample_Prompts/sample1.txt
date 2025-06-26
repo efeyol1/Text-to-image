@@ -1,0 +1,11 @@
+Original Prompt:
+butterfly with a knife trying to kill a man
+
+Enhanced Prompt (Gemini):
+A photorealistic image of a vibrant butterfly, its wings adorned with intricate patterns. The butterfly is unexpectedly wielding a small, shiny knife, seemingly lunging towards a terrified, middle-aged man. The man is in a dimly lit alleyway, possibly running away. The scene is captured with dramatic lighting, emphasizing the contrast between the delicate butterfly and the impending danger.
+
+Model Used:
+Vertex AI
+
+Generated Image Path:
+images/generated_image_1.jpg

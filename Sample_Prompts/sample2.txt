@@ -1,0 +1,11 @@
+Original Prompt:
+view of london after 20 years
+
+Enhanced Prompt (Gemini):
+A futuristic view of London after 20 years. Imagine iconic landmarks like the Houses of Parliament and the London Eye, but transformed by advanced technology and sustainable architecture. Consider flying vehicles weaving through the sky, integrated green spaces, and a vibrant, eco-conscious atmosphere reflecting advancements in the city's infrastructure and population's lifestyle. Focus on a sunny day with vibrant colours.
+
+Model Used:
+Vertex AI
+
+Generated Image Path:
+images/generated_image_2.jpg

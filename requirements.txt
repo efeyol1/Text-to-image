@@ -1,0 +1,7 @@
+google-generativeai
+vertexai
+diffusers
+torch
+transformers
+Pillow
+SpeechRecognition

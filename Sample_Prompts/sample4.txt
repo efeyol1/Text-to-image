@@ -1,0 +1,11 @@
+Original Prompt:
+an engineering student who enters a prompt
+
+Enhanced Prompt (Gemini):
+An imaginative portrait of a diverse engineering student, mid-action, intensely focused on a computer screen while typing a complex prompt for an AI image generator. The scene is set in a modern, brightly lit university lab, with visible code and schematics subtly in the background.
+
+Model Used:
+Hugging Face
+
+Generated Image Path:
+images/generated_image_4.jpg

@@ -1,0 +1,11 @@
+Original Prompt:
+man running away from a slow cheetah
+
+Enhanced Prompt (Gemini):
+A dynamic action shot of a terrified man sprinting away from a lumbering, yet still menacing, cheetah. The scene is set in a savanna environment with tall, dry grass. Dust kicks up from the man's feet as he runs. The cheetah is close behind, its predatory gaze fixed on the fleeing figure. The lighting is warm and golden, suggesting it's either sunrise or sunset.
+
+Model Used:
+Vertex AI
+
+Generated Image Path:
+images/generated_image_3.jpg

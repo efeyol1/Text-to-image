@@ -1,0 +1,11 @@
+Original Prompt:
+12 people who stands in front of a governments building to protest prices of chocolate milk
+
+Enhanced Prompt (Gemini):
+A photograph of twelve diverse people standing defiantly in front of a grand government building, holding signs protesting the high prices of chocolate milk. The scene is set during a sunny afternoon, with vibrant colors. Capture the emotion of frustration and determination on their faces, with the government building as a backdrop.
+
+Model Used:
+Hugging Face
+
+Generated Image Path:
+images/generated_image_6.jpg
